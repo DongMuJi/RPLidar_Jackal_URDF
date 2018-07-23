@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+
+<xacro:include filename="$(find jackal_description)/urdf/rplidar_a2_mount.urdf.xacro"/>
+<xacro:if value="$(optenv JACKAL_RPLIDAR_A2 0)">
+  <rplidar_a2_mount prefix="$(optenv JACKAL_RPLIDAR_A2_MOUNT rear)"
+                    topic="$(optenv JACKAL_RPLIDAR_A2_TOPIC scan)"/>
+  <joint name="$(optenv JACKAL_RPLIDAR_A2_MOUNT rear)_laser_mount_joint" type="fixed">
+    <origin xyz="$(optenv JACKAL_RPLIDAR_A2_OFFSET 0 0 0)" 
+            rpy="$(optenv JACKAL_RPLIDAR_A2_RPY 0 0 0)"/>
+    <parent link="$(optenv JACKAL_RPLIDAR_A2_MOUNT rear)_mount"/>
+    <child link="$(optenv JACKAL_RPLIDAR_A2_MOUNT rear)_laser_mount"/>
+  </joint>
+</xacro:if>
+</robot>
